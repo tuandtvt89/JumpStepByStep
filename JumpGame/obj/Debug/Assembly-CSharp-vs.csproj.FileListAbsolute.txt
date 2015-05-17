@@ -1,0 +1,14 @@
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\Assembly-CSharp.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\Assembly-CSharp.pdb
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\UnityEditor.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\UnityEngine.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\UnityEngine.UI.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\Mono.Cecil.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\Unity.SerializationLogic.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\Unity.DataContract.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+E:\Projects\Unity\JumpGame\Temp\bin\Debug\Unity.CecilTools.dll
+E:\Projects\Unity\JumpGame\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+E:\Projects\Unity\JumpGame\obj\Debug\Assembly-CSharp.dll
+E:\Projects\Unity\JumpGame\obj\Debug\Assembly-CSharp.pdb
