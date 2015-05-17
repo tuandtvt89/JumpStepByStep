@@ -370,7 +370,7 @@ public class Player : MonoBehaviour, ITakeDamage
         float jumpPower = 35.0f;
         float Height = 0.0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f, startPos.z);
+        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f + 0.5f, startPos.z);
         float verticalVelocity = jumpPower;
         float curTime = 0.0f;
 
