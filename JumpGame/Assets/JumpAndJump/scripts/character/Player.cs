@@ -132,6 +132,7 @@ public class Player : MonoBehaviour, ITakeDamage
     public void Kill()
     {
         GetComponent<Collider2D>().enabled = false;
+        canJump = false;
         IsDead = true;
         Health = 0;
     }
