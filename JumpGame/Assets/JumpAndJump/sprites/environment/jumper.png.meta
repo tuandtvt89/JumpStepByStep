@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 83d07fdc4b9fa5343874245d0cf919fd
+timeCreated: 1431959579
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: jumper_0
@@ -30,6 +32,11 @@ TextureImporter:
     21300050: jumper_25
     21300052: jumper_26
     21300054: jumper_27
+    21300056: jumper_28
+    21300058: jumper_29
+    21300060: jumper_30
+    21300062: jumper_31
+    21300064: jumper_32
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,6 +55,9 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -58,6 +68,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -78,8 +89,8 @@ TextureImporter:
         y: 1848
         width: 100
         height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_1
       rect:
@@ -88,7 +99,7 @@ TextureImporter:
         y: 1848
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_2
@@ -98,7 +109,7 @@ TextureImporter:
         y: 1848
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_3
@@ -108,7 +119,7 @@ TextureImporter:
         y: 1848
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_4
@@ -118,7 +129,7 @@ TextureImporter:
         y: 1848
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_5
@@ -128,8 +139,8 @@ TextureImporter:
         y: 1648
         width: 100
         height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_6
       rect:
@@ -138,7 +149,7 @@ TextureImporter:
         y: 1648
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_7
@@ -148,7 +159,7 @@ TextureImporter:
         y: 1648
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_8
@@ -158,7 +169,7 @@ TextureImporter:
         y: 1648
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_9
@@ -168,7 +179,7 @@ TextureImporter:
         y: 1648
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_10
@@ -178,7 +189,7 @@ TextureImporter:
         y: 1448
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_11
@@ -188,7 +199,7 @@ TextureImporter:
         y: 1448
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_12
@@ -198,7 +209,7 @@ TextureImporter:
         y: 1448
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_13
@@ -208,7 +219,7 @@ TextureImporter:
         y: 1448
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_14
@@ -218,7 +229,7 @@ TextureImporter:
         y: 1448
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_15
@@ -228,7 +239,7 @@ TextureImporter:
         y: 1248
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_16
@@ -238,7 +249,7 @@ TextureImporter:
         y: 1248
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_17
@@ -248,7 +259,7 @@ TextureImporter:
         y: 1248
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_18
@@ -258,7 +269,7 @@ TextureImporter:
         y: 1248
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_19
@@ -268,7 +279,7 @@ TextureImporter:
         y: 1248
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_20
@@ -278,7 +289,7 @@ TextureImporter:
         y: 1048
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_21
@@ -288,7 +299,7 @@ TextureImporter:
         y: 1048
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_22
@@ -298,7 +309,7 @@ TextureImporter:
         y: 1048
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_23
@@ -308,7 +319,7 @@ TextureImporter:
         y: 1048
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_24
@@ -318,7 +329,7 @@ TextureImporter:
         y: 1048
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_25
@@ -328,7 +339,7 @@ TextureImporter:
         y: 848
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_26
@@ -338,7 +349,7 @@ TextureImporter:
         y: 848
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: jumper_27
@@ -348,8 +359,60 @@ TextureImporter:
         y: 848
         width: 100
         height: 200
-      alignment: 0
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: jumper_28
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 848
+        width: 100
+        height: 200
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: jumper_29
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 848
+        width: 100
+        height: 200
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: jumper_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 648
+        width: 100
+        height: 200
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: jumper_31
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 648
+        width: 100
+        height: 200
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: jumper_32
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 648
+        width: 100
+        height: 200
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

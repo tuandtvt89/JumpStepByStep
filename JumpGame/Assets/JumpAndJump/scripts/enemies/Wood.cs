@@ -3,18 +3,22 @@ using System.Collections;
 
 public class Wood : MonoBehaviour
 {
-		public int direction;
-		// Use this for initialization
-		void Start ()
-		{
-	
-		}
-	
-		// Update is called once per frame
-		void Update ()
-		{
-	
-		}
+    public int direction;
+    // Use this for initialization
+    void Start()
+    {
 
-		
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Kiss my ass =))");
+
+    }
 }

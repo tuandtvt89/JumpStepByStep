@@ -52,6 +52,7 @@ public class Player : MonoBehaviour, ITakeDamage
     private bool isUsingGravity = true;
 
     private Vector3 _velocity;
+    private Vector3 currentPosition;
 
     void Awake()
     {
@@ -90,10 +91,6 @@ public class Player : MonoBehaviour, ITakeDamage
 
         UpdateAnimator();
 
-    }
-
-    void LateUpdate()
-    {
         if (!IsDead)
         {
             if (isUsingGravity)
@@ -104,11 +101,12 @@ public class Player : MonoBehaviour, ITakeDamage
                 _controller.move(_velocity * Time.deltaTime);
             }
 
-            if (_controller.transform.position.y < -5f) {
+            if (_controller.transform.position.y < -5f)
+            {
                 LevelManager.Instance.KillPlayer();
             }
         }
-        else 
+        else
         {
             // apply gravity before moving
             _velocity.y += gravity * Time.deltaTime;
@@ -116,6 +114,12 @@ public class Player : MonoBehaviour, ITakeDamage
             _controller.move(_velocity * Time.deltaTime);
 
         }
+        
+    }
+
+    void LateUpdate()
+    {
+        
     }
 
     void OnBecameInvisible()
@@ -241,16 +245,22 @@ public class Player : MonoBehaviour, ITakeDamage
 
     void onControllerCollider(RaycastHit2D hit)
     {
-        if (_controller.isGrounded) {
-            if (!canJump) {
+        if (_controller.collisionState.becameGroundedThisFrame)
+        {
+            if (!canJump && hit.transform.tag == "Wood")
+            {
+                currentPosition = hit.transform.position;
+                currentPosition.y += 0.0f;
+                isUsingGravity = false;
+                transform.position = currentPosition;
                 canJump = true;
             }
         }
-
+        
         // bail out on plain old ground hits cause they arent very interesting
         if (hit.normal.y == 1f)
             return;
-
+        
         // logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
         //Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
     }
@@ -258,7 +268,7 @@ public class Player : MonoBehaviour, ITakeDamage
 
     void onTriggerEnterEvent(Collider2D other)
     {
-        Debug.Log("NameCollider: " + other.name);
+
         if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("Player Die");
@@ -268,6 +278,10 @@ public class Player : MonoBehaviour, ITakeDamage
         else if (other.gameObject.tag == "BrokenWood")
         {
             other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.tag == "Buzzsaw")
+        {
+            LevelManager.Instance.KillPlayer();
         }
         else if (other.gameObject.tag == "Jumper")
         {
@@ -281,12 +295,12 @@ public class Player : MonoBehaviour, ITakeDamage
 
     void onTriggerExitEvent(Collider2D col)
     {
-        Debug.Log("onTriggerExitEvent: " + col.gameObject.name);
+        
     }
 
     void onTriggerStayEvent(Collider2D col)
     {
-        Debug.Log("onTriggerStayEvent: " + col.gameObject.name);
+        
     }
     #endregion
 
@@ -310,7 +324,7 @@ public class Player : MonoBehaviour, ITakeDamage
         float jumpPower = 35.0f;
         float Height = 0.0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 0.5f, startPos.z);
+        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y, startPos.z);
         float verticalVelocity = jumpPower;
         float curTime = 0.0f;
 
@@ -326,7 +340,7 @@ public class Player : MonoBehaviour, ITakeDamage
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0); 
         }
-
+        
         isUsingGravity = true;
     }
 
@@ -340,7 +354,7 @@ public class Player : MonoBehaviour, ITakeDamage
         float jumpPower = 35.0f;
         float Height = 0.0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y + 0.5f, startPos.z);
+        Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y, startPos.z);
         float verticalVelocity = jumpPower;
         float curTime = 0.0f;
 
@@ -356,7 +370,7 @@ public class Player : MonoBehaviour, ITakeDamage
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
-
+        
         isUsingGravity = true;
     }
 
@@ -370,7 +384,7 @@ public class Player : MonoBehaviour, ITakeDamage
         float jumpPower = 35.0f;
         float Height = 0.0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f + 0.5f, startPos.z);
+        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f, startPos.z);
         float verticalVelocity = jumpPower;
         float curTime = 0.0f;
 
@@ -386,7 +400,7 @@ public class Player : MonoBehaviour, ITakeDamage
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
-
+        
         isUsingGravity = true;
     }
 }

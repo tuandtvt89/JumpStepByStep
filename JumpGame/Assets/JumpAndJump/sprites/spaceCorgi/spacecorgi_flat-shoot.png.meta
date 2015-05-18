@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 5e30f98e97ee5634eb503a68f098f938
+timeCreated: 1431959054
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: spacecorgi_flat-shoot_0
@@ -45,6 +47,9 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
   maxTextureSize: 2048
@@ -55,6 +60,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -71,252 +77,254 @@ TextureImporter:
     - name: spacecorgi_flat-shoot_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 21
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_1
       rect:
         serializedVersion: 2
-        x: 172
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 183
+        y: 363
+        width: 148
+        height: 142
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_2
       rect:
         serializedVersion: 2
-        x: 342
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 355
+        y: 363
+        width: 146
+        height: 142
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_3
       rect:
         serializedVersion: 2
-        x: 512
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 527
+        y: 363
+        width: 146
+        height: 142
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_4
       rect:
         serializedVersion: 2
-        x: 682
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 698
+        y: 363
+        width: 145
+        height: 142
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_5
       rect:
         serializedVersion: 2
-        x: 852
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 869
+        y: 363
+        width: 146
+        height: 143
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_6
       rect:
         serializedVersion: 2
-        x: 1022
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 1041
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_7
       rect:
         serializedVersion: 2
-        x: 1192
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 1211
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_8
       rect:
         serializedVersion: 2
-        x: 1362
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 1381
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_9
       rect:
         serializedVersion: 2
-        x: 1532
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 1551
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_10
       rect:
         serializedVersion: 2
-        x: 1702
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1721
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_11
       rect:
         serializedVersion: 2
-        x: 1872
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 1891
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_12
       rect:
         serializedVersion: 2
-        x: 2042
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 2061
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_13
       rect:
         serializedVersion: 2
-        x: 2212
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 2231
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_14
       rect:
         serializedVersion: 2
-        x: 2382
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 2401
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_15
       rect:
         serializedVersion: 2
-        x: 2552
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 2571
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_16
       rect:
         serializedVersion: 2
-        x: 2722
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 2741
+        y: 363
+        width: 141
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_17
       rect:
         serializedVersion: 2
-        x: 2892
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 2911
+        y: 363
+        width: 140
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_18
       rect:
         serializedVersion: 2
-        x: 3062
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 3081
+        y: 363
+        width: 140
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_19
       rect:
         serializedVersion: 2
-        x: 3232
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 3251
+        y: 363
+        width: 140
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_20
       rect:
         serializedVersion: 2
-        x: 3402
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 3421
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_21
       rect:
         serializedVersion: 2
-        x: 3572
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 3591
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_22
       rect:
         serializedVersion: 2
-        x: 3742
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 3761
+        y: 363
+        width: 143
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_23
       rect:
         serializedVersion: 2
-        x: 3912
-        y: 364
-        width: 168
-        height: 146
-      alignment: 0
+        x: 3931
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: spacecorgi_flat-shoot_24
       rect:
         serializedVersion: 2
-        x: 2
-        y: 216
-        width: 168
-        height: 146
-      alignment: 0
+        x: 21
+        y: 215
+        width: 144
+        height: 144
+      alignment: 7
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

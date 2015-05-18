@@ -37,6 +37,7 @@ public class JumpEnemy : MonoBehaviour
     private bool isUsingGravity = true;
     private Player playerScript;
     private Vector3 _velocity;
+    private Vector3 currentPosition;
 
     void Awake()
     {
@@ -62,10 +63,7 @@ public class JumpEnemy : MonoBehaviour
     public void Update()
     {
         UpdateAnimator();
-    }
 
-    void LateUpdate()
-    {
         if (isUsingGravity)
         {
             // apply gravity before moving
@@ -73,6 +71,11 @@ public class JumpEnemy : MonoBehaviour
 
             _controller.move(_velocity * Time.deltaTime);
         }
+    }
+
+    void LateUpdate()
+    {
+        
     }
 
     private void UpdateAnimator()
@@ -119,10 +122,14 @@ public class JumpEnemy : MonoBehaviour
 
     void onControllerCollider(RaycastHit2D hit)
     {
-        if (_controller.isGrounded)
+        if (_controller.collisionState.becameGroundedThisFrame)
         {
-            if (!canJump)
+            if (!canJump && hit.transform.tag == "Wood")
             {
+                currentPosition = hit.transform.position;
+                currentPosition.y += 0.0f;
+                transform.position = currentPosition;
+                isUsingGravity = false;
                 canJump = true;
 
                 if (playerScript.jumpTrack.Count > 0)
@@ -194,7 +201,7 @@ public class JumpEnemy : MonoBehaviour
         float jumpPower = 35.0f;
         float Height = 0.0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 0.5f, startPos.z);
+        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y, startPos.z);
         float verticalVelocity = jumpPower;
         float curTime = 0.0f;
 
@@ -224,7 +231,7 @@ public class JumpEnemy : MonoBehaviour
         float jumpPower = 35.0f;
         float Height = 0.0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y + 0.5f, startPos.z);
+        Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y, startPos.z);
         float verticalVelocity = jumpPower;
         float curTime = 0.0f;
 
@@ -254,7 +261,7 @@ public class JumpEnemy : MonoBehaviour
         float jumpPower = 35.0f;
         float Height = 0.0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f + 0.5f, startPos.z);
+        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f, startPos.z);
         float verticalVelocity = jumpPower;
         float curTime = 0.0f;
 
