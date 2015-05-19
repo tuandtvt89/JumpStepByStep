@@ -58,11 +58,12 @@ public class JumpEnemy : MonoBehaviour
         // listen to some events for illustration purposes
         _controller.onControllerCollidedEvent += onControllerCollider;
         _controller.onTriggerEnterEvent += onTriggerEnterEvent;
+        _animator.Play(Animator.StringToHash("Jump"));
     }
 
     public void Update()
     {
-        UpdateAnimator();
+        //UpdateAnimator();
 
         if (isUsingGravity)
         {
@@ -80,9 +81,10 @@ public class JumpEnemy : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        _animator.SetBool("Grounded", _controller.isGrounded);
-        _animator.SetFloat("Speed", Mathf.Abs(_controller.velocity.x));
-        _animator.SetFloat("vSpeed", _controller.velocity.y);
+
+        //_animator.SetBool("isGrounded", _controller.isGrounded);
+        //_animator.SetFloat("Speed", Mathf.Abs(_controller.velocity.x));
+        //_animator.SetFloat("vSpeed", _controller.velocity.y);
     }
 
     public void JumpNear()
@@ -126,11 +128,13 @@ public class JumpEnemy : MonoBehaviour
         {
             if (!canJump && hit.transform.tag == "Wood")
             {
-                currentPosition = hit.transform.position;
-                currentPosition.y += 0.0f;
-                transform.position = currentPosition;
+
+                _controller.move(hit.transform.position - transform.position);
                 isUsingGravity = false;
                 canJump = true;
+
+                Debug.Log("IsGrounded");
+                _animator.Play(Animator.StringToHash("Idle"));
 
                 if (playerScript.jumpTrack.Count > 0)
                     StartCoroutine(JumpAndThink(playerScript.jumpTrack.Dequeue()));
@@ -178,6 +182,7 @@ public class JumpEnemy : MonoBehaviour
                 timeToThink = 0.0f;
             yield return new WaitForSeconds(timeToThink);
             JumpByIndex(index);
+            _animator.Play(Animator.StringToHash("Jump"));
         }
     }
 
@@ -213,7 +218,7 @@ public class JumpEnemy : MonoBehaviour
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
             Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            transform.position = resultPosition;
+            _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
@@ -243,7 +248,7 @@ public class JumpEnemy : MonoBehaviour
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
             Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            transform.position = resultPosition;
+            _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
@@ -273,7 +278,7 @@ public class JumpEnemy : MonoBehaviour
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
             Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            transform.position = resultPosition;
+            _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }

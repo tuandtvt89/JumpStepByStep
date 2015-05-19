@@ -82,6 +82,8 @@ public class Player : MonoBehaviour, ITakeDamage
         _controller.onTriggerEnterEvent += onTriggerEnterEvent;
         _controller.onTriggerExitEvent += onTriggerExitEvent;
         _controller.onTriggerStayEvent += onTriggerStayEvent;
+
+        _animator.Play(Animator.StringToHash("Fall"));
     }
 
     public void Update()
@@ -135,6 +137,7 @@ public class Player : MonoBehaviour, ITakeDamage
         canJump = false;
         IsDead = true;
         Health = 0;
+        transform.gameObject.SetActive(false);
     }
 
     public void FinishLevel()
@@ -196,9 +199,9 @@ public class Player : MonoBehaviour, ITakeDamage
 
     private void UpdateAnimator()
     {
-        _animator.SetBool("Grounded", _controller.isGrounded);
-        _animator.SetFloat("Speed", Mathf.Abs(_controller.velocity.x));
-        _animator.SetFloat("vSpeed", _controller.velocity.y);
+        //_animator.SetBool("Grounded", _controller.isGrounded);
+        //_animator.SetFloat("Speed", Mathf.Abs(_controller.velocity.x));
+        //_animator.SetFloat("vSpeed", _controller.velocity.y);
     }
 
     void AddGroundTouchEffect()
@@ -217,6 +220,7 @@ public class Player : MonoBehaviour, ITakeDamage
         //currentJumpState = JumpState.Near;
         if (canJump)
         {
+            _animator.Play(Animator.StringToHash("Jump"));
             StartCoroutine(JumpNearByTranslate());
             jumpTrack.Enqueue(1);
         }
@@ -227,6 +231,7 @@ public class Player : MonoBehaviour, ITakeDamage
         //currentJumpState = JumpState.Far;
         if (canJump)
         {
+            _animator.Play(Animator.StringToHash("Jump"));
             StartCoroutine(JumpFarByTranslate());
             jumpTrack.Enqueue(2);
         }
@@ -237,6 +242,7 @@ public class Player : MonoBehaviour, ITakeDamage
         //currentJumpState = JumpState.Height;
         if (canJump)
         {
+            _animator.Play(Animator.StringToHash("Jump"));
             StartCoroutine(JumpHeightByTranslate());
             jumpTrack.Enqueue(3);
         }
@@ -250,11 +256,11 @@ public class Player : MonoBehaviour, ITakeDamage
         {
             if (!canJump && hit.transform.tag == "Wood")
             {
-                currentPosition = hit.transform.position;
-                currentPosition.y += 0.0f;
                 isUsingGravity = false;
-                transform.position = currentPosition;
+                _controller.move(hit.transform.position - transform.position);
                 canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
             }
         }
         
@@ -272,7 +278,6 @@ public class Player : MonoBehaviour, ITakeDamage
 
         if (other.gameObject.tag == "Enemy")
         {
-            Debug.Log("Player Die");
             other.gameObject.SetActive(false);
             LevelManager.Instance.KillPlayer();
         }
@@ -337,7 +342,7 @@ public class Player : MonoBehaviour, ITakeDamage
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
             Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            transform.position = resultPosition;
+            _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0); 
         }
@@ -367,7 +372,7 @@ public class Player : MonoBehaviour, ITakeDamage
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
             Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            transform.position = resultPosition;
+            _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
@@ -397,7 +402,7 @@ public class Player : MonoBehaviour, ITakeDamage
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
             Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            transform.position = resultPosition;
+            _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
