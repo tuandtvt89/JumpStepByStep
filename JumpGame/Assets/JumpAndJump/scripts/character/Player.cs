@@ -254,13 +254,40 @@ public class Player : MonoBehaviour, ITakeDamage
     {
         if (_controller.collisionState.becameGroundedThisFrame)
         {
-            if (!canJump && hit.transform.tag == "Wood")
+            if (canJump)
+                return;
+
+            if (hit.transform.tag == "Wood")
             {
                 isUsingGravity = false;
                 _controller.move(hit.transform.position - transform.position);
                 canJump = true;
 
                 _animator.Play(Animator.StringToHash("Idle"));
+            }
+            else if (hit.transform.tag == "Crocodile")
+            {
+                isUsingGravity = false;
+                _controller.move(hit.transform.position - transform.position);
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                CrocodileEnemy crocodileEnemy = hit.transform.gameObject.GetComponent<CrocodileEnemy>();
+                crocodileEnemy.onAttack += this.onCrocodileAttack;
+                crocodileEnemy.WakeUp();
+            }
+            else if (hit.transform.tag == "Snake")
+            {
+                isUsingGravity = false;
+                _controller.move(hit.transform.position - transform.position);
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                SnakeEnemy snakeEnemy = hit.transform.gameObject.GetComponent<SnakeEnemy>();
+                snakeEnemy.onAttack += this.onSnakeAttack;
+                snakeEnemy.Attack();
             }
         }
         
@@ -298,7 +325,6 @@ public class Player : MonoBehaviour, ITakeDamage
         }
     }
 
-
     void onTriggerExitEvent(Collider2D col)
     {
         
@@ -307,6 +333,22 @@ public class Player : MonoBehaviour, ITakeDamage
     void onTriggerStayEvent(Collider2D col)
     {
         
+    }
+
+    void onCrocodileAttack()
+    {
+        if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
+        {
+            LevelManager.Instance.KillPlayer();
+        }
+    }
+
+    void onSnakeAttack()
+    {
+        if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
+        {
+            LevelManager.Instance.KillPlayer();
+        }
     }
     #endregion
 
@@ -328,7 +370,7 @@ public class Player : MonoBehaviour, ITakeDamage
         isUsingGravity = false;
         float timeJump = 0.2f;
         float jumpPower = 35.0f;
-        float Height = 0.0f;
+        float height = 0.0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y, startPos.z);
         float verticalVelocity = jumpPower;
@@ -337,11 +379,11 @@ public class Player : MonoBehaviour, ITakeDamage
         while (curTime < timeJump)
         {
             float rate = curTime / timeJump;
-            Height += verticalVelocity * Time.deltaTime;
+            height += verticalVelocity * Time.deltaTime;
             verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * Height);
+            Vector3 resultPosition = basePosition + (Vector3.up * height);
             _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0); 
@@ -358,7 +400,7 @@ public class Player : MonoBehaviour, ITakeDamage
         isUsingGravity = false;
         float timeJump = 0.3f;
         float jumpPower = 35.0f;
-        float Height = 0.0f;
+        float height = 0.0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y, startPos.z);
         float verticalVelocity = jumpPower;
@@ -367,11 +409,11 @@ public class Player : MonoBehaviour, ITakeDamage
         while (curTime < timeJump)
         {
             float rate = curTime / timeJump;
-            Height += verticalVelocity * Time.deltaTime;
+            height += verticalVelocity * Time.deltaTime;
             verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * Height);
+            Vector3 resultPosition = basePosition + (Vector3.up * height);
             _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);
@@ -388,7 +430,7 @@ public class Player : MonoBehaviour, ITakeDamage
         isUsingGravity = false;
         float timeJump = 0.25f;
         float jumpPower = 35.0f;
-        float Height = 0.0f;
+        float height = 0.0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f, startPos.z);
         float verticalVelocity = jumpPower;
@@ -397,11 +439,11 @@ public class Player : MonoBehaviour, ITakeDamage
         while (curTime < timeJump)
         {
             float rate = curTime / timeJump;
-            Height += verticalVelocity * Time.deltaTime;
+            height += verticalVelocity * Time.deltaTime;
             verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
 
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * Height);
+            Vector3 resultPosition = basePosition + (Vector3.up * height);
             _controller.move(resultPosition - transform.position);
             curTime += Time.deltaTime;
             yield return new WaitForSeconds(0);

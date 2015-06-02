@@ -126,18 +126,45 @@ public class JumpEnemy : MonoBehaviour
     {
         if (_controller.collisionState.becameGroundedThisFrame)
         {
-            if (!canJump && hit.transform.tag == "Wood")
-            {
+            if (canJump)
+                return;
 
+            if (hit.transform.tag == "Wood")
+            {
                 _controller.move(hit.transform.position - transform.position);
                 isUsingGravity = false;
                 canJump = true;
 
-                Debug.Log("IsGrounded");
                 _animator.Play(Animator.StringToHash("Idle"));
 
                 if (playerScript.jumpTrack.Count > 0)
                     StartCoroutine(JumpAndThink(playerScript.jumpTrack.Dequeue()));
+            }
+            else if (hit.transform.tag == "Crocodile")
+            {
+                _controller.move(hit.transform.position - transform.position);
+                isUsingGravity = false;
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                if (playerScript.jumpTrack.Count > 0)
+                    JumpByIndex(playerScript.jumpTrack.Dequeue());
+
+                CrocodileEnemy crocodileEnemy = hit.transform.gameObject.GetComponent<CrocodileEnemy>();
+                crocodileEnemy.WakeUpWithoutAttacking();
+            }
+            else if (hit.transform.tag == "Snake")
+            {
+                _controller.move(hit.transform.position - transform.position);
+                isUsingGravity = false;
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                if (playerScript.jumpTrack.Count > 0)
+                    JumpByIndex(playerScript.jumpTrack.Dequeue());
+
             }
         }
 
@@ -167,7 +194,7 @@ public class JumpEnemy : MonoBehaviour
     public void Pause()
     {
         canJump = false;
-        //enabled = false;
+        enabled = false;
         StopAllCoroutines();
     }
 

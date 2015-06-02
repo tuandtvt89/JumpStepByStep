@@ -16,9 +16,4 @@ public class Wood : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Kiss my ass =))");
-
-    }
 }

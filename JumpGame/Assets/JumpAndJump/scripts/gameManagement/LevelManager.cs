@@ -125,8 +125,8 @@ public class LevelManager : MonoBehaviour
     {
         Player.Kill();
         Camera.cameraFollowsPlayer = false;
+        yield return new WaitForSeconds(0.5f);
         JumpEnemy.Pause();
-        yield return new WaitForSeconds(0f);
         GameOverPopUp.SetActive(true);
         GameManager.Instance.ResetPoints(_savedPoints);
     }
