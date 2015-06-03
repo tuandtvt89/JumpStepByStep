@@ -289,6 +289,31 @@ public class Player : MonoBehaviour, ITakeDamage
                 snakeEnemy.onAttack += this.onSnakeAttack;
                 snakeEnemy.Attack();
             }
+            else if (hit.transform.tag == "Hippo")
+            {
+                isUsingGravity = false;
+                _controller.move(hit.transform.position - transform.position);
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                HippoEnemy hippoEnemy = hit.transform.gameObject.GetComponent<HippoEnemy>();
+                hippoEnemy.onAttack += this.onHippoAttack;
+                hippoEnemy.WakeUp();
+            }
+            else if (hit.transform.tag == "Turtle")
+            {
+                isUsingGravity = false;
+                _controller.move(hit.transform.position - transform.position);
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                TurtleEnemy turtleEnemy = hit.transform.gameObject.GetComponent<TurtleEnemy>();
+                turtleEnemy.onAttack += this.onTurtleAttack;
+                turtleEnemy.WakeUp();
+            }
+            
         }
         
         // bail out on plain old ground hits cause they arent very interesting
@@ -344,6 +369,22 @@ public class Player : MonoBehaviour, ITakeDamage
     }
 
     void onSnakeAttack()
+    {
+        if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
+        {
+            LevelManager.Instance.KillPlayer();
+        }
+    }
+
+    void onHippoAttack()
+    {
+        if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
+        {
+            LevelManager.Instance.KillPlayer();
+        }
+    }
+
+    void onTurtleAttack()
     {
         if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
         {

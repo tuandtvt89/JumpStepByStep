@@ -166,6 +166,34 @@ public class JumpEnemy : MonoBehaviour
                     JumpByIndex(playerScript.jumpTrack.Dequeue());
 
             }
+            else if (hit.transform.tag == "Hippo")
+            {
+                _controller.move(hit.transform.position - transform.position);
+                isUsingGravity = false;
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                if (playerScript.jumpTrack.Count > 0)
+                    JumpByIndex(playerScript.jumpTrack.Dequeue());
+
+                HippoEnemy hippoEnemy = hit.transform.gameObject.GetComponent<HippoEnemy>();
+                hippoEnemy.WakeUpWithoutAttacking();
+            }
+            else if (hit.transform.tag == "Turtle")
+            {
+                _controller.move(hit.transform.position - transform.position);
+                isUsingGravity = false;
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                if (playerScript.jumpTrack.Count > 0)
+                    JumpByIndex(playerScript.jumpTrack.Dequeue());
+
+                TurtleEnemy turtleEnemy = hit.transform.gameObject.GetComponent<TurtleEnemy>();
+                turtleEnemy.WakeUpWithoutAttacking();
+            }
         }
 
         // bail out on plain old ground hits cause they arent very interesting
