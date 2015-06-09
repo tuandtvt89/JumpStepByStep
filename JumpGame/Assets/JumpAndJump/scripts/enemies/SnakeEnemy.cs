@@ -6,7 +6,7 @@ public class SnakeEnemy : MonoBehaviour {
     public float waitToAttackTime = 0.4f;
     public float timeToWakeUp = 0.8f;
     public float timeToSleep = 1f;
-    public delegate void SnakeAttackHandler();
+    public delegate void SnakeAttackHandler(float posX);
     public event SnakeAttackHandler onAttack;
 
     private Animator _animator;
@@ -39,7 +39,7 @@ public class SnakeEnemy : MonoBehaviour {
         _animator.Play(Animator.StringToHash("Attack"));
         if (onAttack != null)
         {
-            onAttack();
+            onAttack(transform.position.x);
         }
 
         // Return to normal

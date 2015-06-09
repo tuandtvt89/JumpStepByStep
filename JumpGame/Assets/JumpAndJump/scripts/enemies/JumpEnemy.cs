@@ -58,6 +58,8 @@ public class JumpEnemy : MonoBehaviour
         // listen to some events for illustration purposes
         _controller.onControllerCollidedEvent += onControllerCollider;
         _controller.onTriggerEnterEvent += onTriggerEnterEvent;
+        _controller.onTriggerExitEvent += onTriggerExitEvent;
+        _controller.onTriggerStayEvent += onTriggerStayEvent;
         _animator.Play(Animator.StringToHash("Jump"));
     }
 
@@ -216,6 +218,57 @@ public class JumpEnemy : MonoBehaviour
                                              gameObject.transform.position.z);
             StartCoroutine(JumpFarByTranslate());
         }
+    }
+
+    void onTriggerStayEvent(Collider2D other)
+    {
+        if (other.gameObject.tag == "TeleportWood")
+        {
+            if (transform.position.y <= other.transform.parent.transform.position.y)
+            {
+                Vector2 tempVector = transform.position;
+                tempVector.y = other.transform.parent.transform.position.y;
+                transform.position = tempVector;
+
+                isUsingGravity = false;
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                if (playerScript.jumpTrack.Count > 0)
+                    JumpByIndex(playerScript.jumpTrack.Dequeue());
+            }
+        }
+        else if (other.gameObject.tag == "TeleportWoodVerticle")
+        {
+            var teleportWoodVerticleObject = other.transform.FindChild("TeleportWood");
+            if (teleportWoodVerticleObject)
+            {
+                TeleportWood teleportWoodScript = teleportWoodVerticleObject.gameObject.GetComponent<TeleportWood>();
+                float heightLimit = teleportWoodScript.GetLastTrackHeight();
+
+                if (transform.position.y <= heightLimit)
+                {
+                    Vector2 tempVector = transform.position;
+                    tempVector.y = heightLimit;
+                    transform.position = tempVector;
+
+                    isUsingGravity = false;
+                    canJump = true;
+
+                    _animator.Play(Animator.StringToHash("Idle"));
+
+                    if (playerScript.jumpTrack.Count > 0)
+                        JumpByIndex(playerScript.jumpTrack.Dequeue());
+                }
+            }
+            
+        }
+    }
+
+    void onTriggerExitEvent(Collider2D other)
+    {
+        
     }
     #endregion
 

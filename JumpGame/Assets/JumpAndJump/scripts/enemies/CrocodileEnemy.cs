@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CrocodileEnemy : MonoBehaviour {
     public float waitToAttackTime = 0.5f;
-    public delegate void CrocodileAttackHandler();
+    public delegate void CrocodileAttackHandler(float posX);
     public event CrocodileAttackHandler onAttack;
 
     private Animator _animator;
@@ -30,7 +30,7 @@ public class CrocodileEnemy : MonoBehaviour {
         _animator.Play(Animator.StringToHash("Attack"));
         if (onAttack != null)
         {
-            onAttack();
+            onAttack(transform.position.x);
         }
         
         // Return to normal

@@ -42,6 +42,14 @@ public class Player : MonoBehaviour, ITakeDamage
         Far,
         Height
     }
+
+    struct ItemTrack
+    {
+        public int jumpIndex;
+        public GameObject trackObject;
+    }
+
+
     private JumpState currentJumpState;
 
     // Tun El
@@ -248,6 +256,106 @@ public class Player : MonoBehaviour, ITakeDamage
         }
     }
 
+    void JumpByIndex(int index)
+    {
+        if (index == 1)
+            StartCoroutine(JumpNearByTranslate());
+        else if (index == 2)
+            StartCoroutine(JumpFarByTranslate());
+        else if (index == 3)
+            StartCoroutine(JumpHeightByTranslate());
+    }
+
+    IEnumerator JumpNearByTranslate()
+    {
+        AddGroundTouchEffect();
+
+        canJump = false;
+        isUsingGravity = false;
+        float timeJump = 0.2f;
+        float jumpPower = 35.0f;
+        float height = 0.0f;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y, startPos.z);
+        float verticalVelocity = jumpPower;
+        float curTime = 0.0f;
+
+        while (curTime < timeJump)
+        {
+            float rate = curTime / timeJump;
+            height += verticalVelocity * Time.deltaTime;
+            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
+
+            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
+            Vector3 resultPosition = basePosition + (Vector3.up * height);
+            _controller.move(resultPosition - transform.position);
+            curTime += Time.deltaTime;
+            yield return new WaitForSeconds(0);
+        }
+
+        isUsingGravity = true;
+    }
+
+    IEnumerator JumpFarByTranslate()
+    {
+        AddGroundTouchEffect();
+
+        canJump = false;
+        isUsingGravity = false;
+        float timeJump = 0.3f;
+        float jumpPower = 35.0f;
+        float height = 0.0f;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y, startPos.z);
+        float verticalVelocity = jumpPower;
+        float curTime = 0.0f;
+
+        while (curTime < timeJump)
+        {
+            float rate = curTime / timeJump;
+            height += verticalVelocity * Time.deltaTime;
+            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
+
+            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
+            Vector3 resultPosition = basePosition + (Vector3.up * height);
+            _controller.move(resultPosition - transform.position);
+            curTime += Time.deltaTime;
+            yield return new WaitForSeconds(0);
+        }
+
+        isUsingGravity = true;
+    }
+
+    IEnumerator JumpHeightByTranslate()
+    {
+        AddGroundTouchEffect();
+
+        canJump = false;
+        isUsingGravity = false;
+        float timeJump = 0.25f;
+        float jumpPower = 35.0f;
+        float height = 0.0f;
+        Vector3 startPos = transform.position;
+        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f, startPos.z);
+        float verticalVelocity = jumpPower;
+        float curTime = 0.0f;
+
+        while (curTime < timeJump)
+        {
+            float rate = curTime / timeJump;
+            height += verticalVelocity * Time.deltaTime;
+            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
+
+            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
+            Vector3 resultPosition = basePosition + (Vector3.up * height);
+            _controller.move(resultPosition - transform.position);
+            curTime += Time.deltaTime;
+            yield return new WaitForSeconds(0);
+        }
+
+        isUsingGravity = true;
+    }
+
     #region Event Listeners
 
     void onControllerCollider(RaycastHit2D hit)
@@ -259,15 +367,13 @@ public class Player : MonoBehaviour, ITakeDamage
 
             if (hit.transform.tag == "Wood")
             {
-                isUsingGravity = false;
                 _controller.move(hit.transform.position - transform.position);
                 canJump = true;
 
                 _animator.Play(Animator.StringToHash("Idle"));
             }
             else if (hit.transform.tag == "Crocodile")
-            {
-                isUsingGravity = false;
+            {   
                 _controller.move(hit.transform.position - transform.position);
                 canJump = true;
 
@@ -278,8 +384,7 @@ public class Player : MonoBehaviour, ITakeDamage
                 crocodileEnemy.WakeUp();
             }
             else if (hit.transform.tag == "Snake")
-            {
-                isUsingGravity = false;
+            {   
                 _controller.move(hit.transform.position - transform.position);
                 canJump = true;
 
@@ -290,8 +395,7 @@ public class Player : MonoBehaviour, ITakeDamage
                 snakeEnemy.Attack();
             }
             else if (hit.transform.tag == "Hippo")
-            {
-                isUsingGravity = false;
+            {   
                 _controller.move(hit.transform.position - transform.position);
                 canJump = true;
 
@@ -303,7 +407,6 @@ public class Player : MonoBehaviour, ITakeDamage
             }
             else if (hit.transform.tag == "Turtle")
             {
-                isUsingGravity = false;
                 _controller.move(hit.transform.position - transform.position);
                 canJump = true;
 
@@ -312,6 +415,16 @@ public class Player : MonoBehaviour, ITakeDamage
                 TurtleEnemy turtleEnemy = hit.transform.gameObject.GetComponent<TurtleEnemy>();
                 turtleEnemy.onAttack += this.onTurtleAttack;
                 turtleEnemy.WakeUp();
+            }
+            else if (hit.transform.tag == "TeleportWood")
+            {
+                _controller.move(hit.transform.position - transform.position);
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                TeleportWood teleportWood = hit.transform.gameObject.GetComponent<TeleportWood>();
+                teleportWood.AddTargetTrack();
             }
             
         }
@@ -360,136 +473,41 @@ public class Player : MonoBehaviour, ITakeDamage
         
     }
 
-    void onCrocodileAttack()
+    void onCrocodileAttack(float posX)
     {
         if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
         {
-            LevelManager.Instance.KillPlayer();
+            if (transform.position.x <= posX + 0.5f)
+                LevelManager.Instance.KillPlayer();
         }
     }
 
-    void onSnakeAttack()
+    void onSnakeAttack(float posX)
     {
         if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
         {
-            LevelManager.Instance.KillPlayer();
+            if (transform.position.x <= posX + 0.5f)
+                LevelManager.Instance.KillPlayer();
         }
     }
 
-    void onHippoAttack()
+    void onHippoAttack(float posX)
     {
         if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
         {
-            LevelManager.Instance.KillPlayer();
+            if (transform.position.x <= posX + 0.5f)
+                LevelManager.Instance.KillPlayer();
         }
     }
 
-    void onTurtleAttack()
+    void onTurtleAttack(float posX)
     {
         if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
         {
-            LevelManager.Instance.KillPlayer();
+            if (transform.position.x <= posX + 0.5f)
+                LevelManager.Instance.KillPlayer();
         }
     }
     #endregion
 
-    void JumpByIndex(int index)
-    {
-        if (index == 1)
-            StartCoroutine(JumpNearByTranslate());
-        else if (index == 2)
-            StartCoroutine(JumpFarByTranslate());
-        else if (index == 3)
-            StartCoroutine(JumpHeightByTranslate());
-    }
-
-    IEnumerator JumpNearByTranslate()
-    {
-        AddGroundTouchEffect();
-
-        canJump = false;
-        isUsingGravity = false;
-        float timeJump = 0.2f;
-        float jumpPower = 35.0f;
-        float height = 0.0f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y, startPos.z);
-        float verticalVelocity = jumpPower;
-        float curTime = 0.0f;
-
-        while (curTime < timeJump)
-        {
-            float rate = curTime / timeJump;
-            height += verticalVelocity * Time.deltaTime;
-            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
-
-            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * height);
-            _controller.move(resultPosition - transform.position);
-            curTime += Time.deltaTime;
-            yield return new WaitForSeconds(0); 
-        }
-        
-        isUsingGravity = true;
-    }
-
-    IEnumerator JumpFarByTranslate()
-    {
-        AddGroundTouchEffect();
-
-        canJump = false;
-        isUsingGravity = false;
-        float timeJump = 0.3f;
-        float jumpPower = 35.0f;
-        float height = 0.0f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y, startPos.z);
-        float verticalVelocity = jumpPower;
-        float curTime = 0.0f;
-
-        while (curTime < timeJump)
-        {
-            float rate = curTime / timeJump;
-            height += verticalVelocity * Time.deltaTime;
-            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
-
-            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * height);
-            _controller.move(resultPosition - transform.position);
-            curTime += Time.deltaTime;
-            yield return new WaitForSeconds(0);
-        }
-        
-        isUsingGravity = true;
-    }
-
-    IEnumerator JumpHeightByTranslate()
-    {
-        AddGroundTouchEffect();
-
-        canJump = false;
-        isUsingGravity = false;
-        float timeJump = 0.25f;
-        float jumpPower = 35.0f;
-        float height = 0.0f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f, startPos.z);
-        float verticalVelocity = jumpPower;
-        float curTime = 0.0f;
-
-        while (curTime < timeJump)
-        {
-            float rate = curTime / timeJump;
-            height += verticalVelocity * Time.deltaTime;
-            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
-
-            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * height);
-            _controller.move(resultPosition - transform.position);
-            curTime += Time.deltaTime;
-            yield return new WaitForSeconds(0);
-        }
-        
-        isUsingGravity = true;
-    }
 }

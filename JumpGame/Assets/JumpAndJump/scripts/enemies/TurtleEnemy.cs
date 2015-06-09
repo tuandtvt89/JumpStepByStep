@@ -4,7 +4,7 @@ using System.Collections;
 public class TurtleEnemy : MonoBehaviour {
 
     public float waitToHideTime = 0.5f;
-    public delegate void TurtleAttackHandler();
+    public delegate void TurtleAttackHandler(float posX);
     public event TurtleAttackHandler onAttack;
 
     private Animator _animator;
@@ -32,7 +32,7 @@ public class TurtleEnemy : MonoBehaviour {
         _animator.Play(Animator.StringToHash("Hide"));
         if (onAttack != null)
         {
-            onAttack();
+            onAttack(transform.position.x);
         }
 
         // Return to normal
