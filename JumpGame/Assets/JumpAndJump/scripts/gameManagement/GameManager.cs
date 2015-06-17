@@ -6,6 +6,8 @@ public class GameManager
 	private static GameManager _instance;
 
 	public static GameManager Instance { get { return _instance ?? (_instance = new GameManager()); }}
+
+    private bool usingSound = true;
 	
 	public int Points { get; private set; }
 	
@@ -28,4 +30,13 @@ public class GameManager
 	{
 		Points = points;
 	}
+
+    public bool UsingSound {
+        get {
+            return this.usingSound;
+        }
+        set {
+            this.usingSound = value;
+        }
+    }
 }

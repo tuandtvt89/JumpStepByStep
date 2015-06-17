@@ -12,8 +12,23 @@ public class HomeScreen : MonoBehaviour {
 	void Update () {
 	
 	}
+
 	public void PlayGame(){
 
 		Application.LoadLevel ("Level");
 	}
+
+    public void TurnSound() { 
+        
+    }
+
+    public void Rate()
+    {
+
+    }
+
+    public void OpenGoal()
+    {
+
+    }
 }

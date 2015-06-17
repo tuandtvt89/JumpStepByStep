@@ -103,6 +103,10 @@ public class LevelManager : MonoBehaviour
         Application.LoadLevel("Level");
     }
 
+    public void BackToHome() {
+        Application.LoadLevel(0);
+    }
+
     private IEnumerator GotoLevelCo(string levelName)
     {
         Player.FinishLevel();
