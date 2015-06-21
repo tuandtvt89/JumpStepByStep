@@ -111,7 +111,7 @@ public class Player : MonoBehaviour, ITakeDamage
                 _controller.move(_velocity * Time.deltaTime);
             }
 
-            if (_controller.transform.position.y < -5f)
+            if (_controller.transform.position.y < -10f)
             {
                 LevelManager.Instance.KillPlayer();
             }
@@ -456,9 +456,9 @@ public class Player : MonoBehaviour, ITakeDamage
         }
         else if (other.gameObject.tag == "Jumper")
         {
-            gameObject.transform.position = new Vector3(other.transform.position.x + 0.4f,
-                                             gameObject.transform.position.y,
-                                             gameObject.transform.position.z);
+            _controller.move(other.transform.position - transform.position);
+            canJump = true;
+            
             StartCoroutine(JumpFarByTranslate());
         }
     }

@@ -38,6 +38,9 @@ public class JumpEnemy : MonoBehaviour
     private Player playerScript;
     private Vector3 _velocity;
     private Vector3 currentPosition;
+    private BoxCollider2D _boxCollider;
+
+    public Transform startPos;
 
     void Awake()
     {
@@ -50,6 +53,8 @@ public class JumpEnemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _isFacingRight = transform.localScale.x > 0;
+        _boxCollider = GetComponent<BoxCollider2D>();
+        transform.position = new Vector2(transform.position.x, startPos.position.y);
 
         playerScript = player.GetComponent<Player>();
 
@@ -224,12 +229,8 @@ public class JumpEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "TeleportWood")
         {
-            if (transform.position.y <= other.transform.parent.transform.position.y)
+            if (isUsingGravity) // Check when finish jumping
             {
-                Vector2 tempVector = transform.position;
-                tempVector.y = other.transform.parent.transform.position.y;
-                transform.position = tempVector;
-
                 isUsingGravity = false;
                 canJump = true;
 
@@ -245,21 +246,20 @@ public class JumpEnemy : MonoBehaviour
             if (teleportWoodVerticleObject)
             {
                 TeleportWood teleportWoodScript = teleportWoodVerticleObject.gameObject.GetComponent<TeleportWood>();
-                float heightLimit = teleportWoodScript.GetLastTrackHeight();
 
-                if (transform.position.y <= heightLimit)
+
+                if (isUsingGravity) // Check when finish jumping
                 {
-                    Vector2 tempVector = transform.position;
-                    tempVector.y = heightLimit;
-                    transform.position = tempVector;
+                    if (true)
+                    {
+                        isUsingGravity = false;
+                        canJump = true;
 
-                    isUsingGravity = false;
-                    canJump = true;
+                        _animator.Play(Animator.StringToHash("Idle"));
 
-                    _animator.Play(Animator.StringToHash("Idle"));
-
-                    if (playerScript.jumpTrack.Count > 0)
-                        JumpByIndex(playerScript.jumpTrack.Dequeue());
+                        if (playerScript.jumpTrack.Count > 0)
+                            JumpByIndex(playerScript.jumpTrack.Dequeue());
+                    }
                 }
             }
             
@@ -268,7 +268,7 @@ public class JumpEnemy : MonoBehaviour
 
     void onTriggerExitEvent(Collider2D other)
     {
-        
+
     }
     #endregion
 

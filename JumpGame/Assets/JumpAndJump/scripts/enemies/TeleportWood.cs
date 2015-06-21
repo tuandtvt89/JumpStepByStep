@@ -89,9 +89,10 @@ public class TeleportWood : MonoBehaviour {
         if (targetTrack.Count != 0)
         {
             Vector2 lastTrackPos = targetTrack.Dequeue();
-            height = lastTrackPos.y;
+            Vector2 lastTrackGlobalPos = transform.TransformPoint(lastTrackPos);
+            height = lastTrackGlobalPos.y;
         }
-
+        Debug.Log("Track Height: " + height);
         return height;
     }
 

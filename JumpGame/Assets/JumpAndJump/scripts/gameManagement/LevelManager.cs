@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public JumpEnemy JumpEnemy { get; private set; }
 
-    public CameraController Camera { get; private set; }
+    public CameraController mCamera { get; private set; }
 
     public TimeSpan RunningTime { get { return DateTime.UtcNow - _started; } }
 
@@ -40,10 +40,16 @@ public class LevelManager : MonoBehaviour
     public int BonusCutoffSeconds = 30;
     public int BonusSecondMultiplier = 1;
 
+    private float bottomPostionY = 0f;
+
     public void Awake()
     {
         _savedPoints = GameManager.Instance.Points;
         Instance = this;
+
+        // Find the bottom of the scene
+        float camHalfHeight = Camera.main.orthographicSize;
+        bottomPostionY = Camera.main.transform.position.y - camHalfHeight + 5f;
     }
 
     public void Start()
@@ -53,7 +59,7 @@ public class LevelManager : MonoBehaviour
         _currentCheckPointIndex = _checkpoints.Count > 0 ? 0 : -1;
 
         Player = FindObjectOfType<Player>();
-        Camera = FindObjectOfType<CameraController>();
+        mCamera = FindObjectOfType<CameraController>();
         JumpEnemy = FindObjectOfType<JumpEnemy>();
 
             _started = DateTime.UtcNow;
@@ -128,7 +134,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator KillPlayerCo()
     {
         Player.Kill();
-        Camera.cameraFollowsPlayer = false;
+        mCamera.cameraFollowsPlayer = false;
         yield return new WaitForSeconds(0.5f);
         JumpEnemy.Pause();
         GameOverPopUp.SetActive(true);
@@ -141,19 +147,19 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < levelArray.Count(); i++)
         {
             levelList.Add(levelArray[i]);
-            levelArray[i].transform.position = new Vector3(-40.0f, 0, 0);
+            levelArray[i].transform.position = new Vector3(-40.0f, bottomPostionY, 0);
         }
         firstLevel = levelList[0];
         levelList.Remove(firstLevel);
-        firstLevel.transform.position = new Vector3(0, 0, 0);
+        firstLevel.transform.position = new Vector3(0, bottomPostionY, 0);
         secondLevel = levelList[UnityEngine.Random.Range(0, levelList.Count())];
-        secondLevel.transform.position = new Vector3(32.3f, 0, 0);
+        secondLevel.transform.position = new Vector3(32.3f, bottomPostionY, 0);
         levelList.Remove(secondLevel);
         thirdLevel = levelList[UnityEngine.Random.Range(0, levelList.Count())];
-        thirdLevel.transform.position = new Vector3(32.3f * 2, 0, 0);
+        thirdLevel.transform.position = new Vector3(32.3f * 2, bottomPostionY, 0);
         levelList.Remove(thirdLevel);
         fourthLevel = levelList[UnityEngine.Random.Range(0, levelList.Count())];
-        fourthLevel.transform.position = new Vector3(32.3f * 3, 0, 0);
+        fourthLevel.transform.position = new Vector3(32.3f * 3, bottomPostionY, 0);
         levelList.Remove(fourthLevel);
         currentLevelIndex = 0;
     }
@@ -164,13 +170,13 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Swap level " + currentLevelIndex);
             levelList.Add(firstLevel);
-            firstLevel.transform.position = new Vector3(-40, 0, 0);
+            firstLevel.transform.position = new Vector3(-40, bottomPostionY, 0);
             firstLevel = secondLevel;
             secondLevel = thirdLevel;
             thirdLevel = fourthLevel;
             fourthLevel = levelList[UnityEngine.Random.Range(0, levelList.Count())];
             levelList.Remove(fourthLevel);
-            fourthLevel.transform.position = new Vector3(32.3f * (currentLevelIndex + 2), 0, 0);
+            fourthLevel.transform.position = new Vector3(32.3f * (currentLevelIndex + 2), bottomPostionY, 0);
         }
         currentLevelIndex++;
     }
