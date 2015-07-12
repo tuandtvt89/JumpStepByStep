@@ -62,6 +62,12 @@ public class Player : MonoBehaviour, ITakeDamage
     private Vector3 _velocity;
     private Vector3 currentPosition;
 
+    private Vector3 mouseDownStartPos = Vector3.zero;
+    private float minDistance = 70.0f;
+    private float screenWidth = 0.0f;
+    private Vector3 direction = Vector3.zero;
+    private bool touchInLeftSide = false;
+
     void Awake()
     {
         sceneCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -92,12 +98,42 @@ public class Player : MonoBehaviour, ITakeDamage
         _controller.onTriggerStayEvent += onTriggerStayEvent;
 
         _animator.Play(Animator.StringToHash("Fall"));
+
+        screenWidth = Screen.width;
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+
+        // Event touch 
+        if (Input.GetMouseButtonDown(0))
+        {
+            mouseDownStartPos = Input.mousePosition;
+
+            if (mouseDownStartPos.x < screenWidth / 2)
+                touchInLeftSide = true;
+            else
+                touchInLeftSide = false;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            direction = Input.mousePosition - mouseDownStartPos;
+
+            if (direction.y > 0 && direction.magnitude > minDistance)
+            {
+                JumpHeight();
+            }
+            else if (direction.magnitude <= minDistance)
+            {
+                if (touchInLeftSide)
+                    JumpNear();
+                else
+                    JumpFar();
+            }
+        }
 
         UpdateAnimator();
 
@@ -451,6 +487,10 @@ public class Player : MonoBehaviour, ITakeDamage
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.tag == "Buzzsaw")
+        {
+            LevelManager.Instance.KillPlayer();
+        }
+        else if (other.gameObject.tag == "DeadObstruction")
         {
             LevelManager.Instance.KillPlayer();
         }
