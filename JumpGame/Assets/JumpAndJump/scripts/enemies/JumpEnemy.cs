@@ -42,6 +42,9 @@ public class JumpEnemy : MonoBehaviour
 
     public Transform startPos;
 
+    // Tutorial
+    private bool inTutorial = false;
+
     void Awake()
     {
         _controller = GetComponent<CharacterController2D>();
@@ -81,9 +84,9 @@ public class JumpEnemy : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    public void SetTutorialState(bool mInTutorial)
     {
-        
+        this.inTutorial = mInTutorial;
     }
 
     private void UpdateAnimator()
@@ -139,10 +142,14 @@ public class JumpEnemy : MonoBehaviour
             if (hit.transform.tag == "Wood")
             {
                 _controller.move(hit.transform.position - transform.position);
-                isUsingGravity = false;
-                canJump = true;
 
                 _animator.Play(Animator.StringToHash("Idle"));
+
+                if (inTutorial)
+                    return;
+
+                isUsingGravity = false;
+                canJump = true;
 
                 if (playerScript.jumpTrack.Count > 0)
                     StartCoroutine(JumpAndThink(playerScript.jumpTrack.Dequeue()));
@@ -240,6 +247,19 @@ public class JumpEnemy : MonoBehaviour
                     JumpByIndex(playerScript.jumpTrack.Dequeue());
             }
         }
+        else if (other.gameObject.tag == "BrokenPlatform")
+        {
+            if (isUsingGravity) // Check when finish jumping
+            {
+                isUsingGravity = false;
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                if (playerScript.jumpTrack.Count > 0)
+                    JumpByIndex(playerScript.jumpTrack.Dequeue());
+            }
+        }
         else if (other.gameObject.tag == "TeleportWoodVerticle")
         {
             var teleportWoodVerticleObject = other.transform.FindChild("TeleportWood");
@@ -296,12 +316,15 @@ public class JumpEnemy : MonoBehaviour
 
     void JumpByIndex(int index)
     {
-        if (index == 1)
-            StartCoroutine(JumpNearByTranslate());
-        else if (index == 2)
-            StartCoroutine(JumpFarByTranslate());
-        else if (index == 3)
-            StartCoroutine(JumpHeightByTranslate());
+        if (canJump)
+        {
+            if (index == 1)
+                StartCoroutine(JumpNearByTranslate());
+            else if (index == 2)
+                StartCoroutine(JumpFarByTranslate());
+            else if (index == 3)
+                StartCoroutine(JumpHeightByTranslate());
+        }
     }
 
     IEnumerator JumpNearByTranslate()

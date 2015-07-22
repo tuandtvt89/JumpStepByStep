@@ -68,6 +68,21 @@ public class Player : MonoBehaviour, ITakeDamage
     private Vector3 direction = Vector3.zero;
     private bool touchInLeftSide = false;
 
+    // Tutorial 
+    public GameObject leftTapTut;
+    public GameObject rightTapTut;
+    public GameObject swipeTut;
+
+    private bool inTutorial = true;
+    public enum TutorialState
+    {
+        Begin,
+        JumpNear,
+        JumpFar,
+        JumpHeight
+    }
+    private TutorialState tutorialState;
+
     void Awake()
     {
         sceneCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -100,6 +115,14 @@ public class Player : MonoBehaviour, ITakeDamage
         _animator.Play(Animator.StringToHash("Fall"));
 
         screenWidth = Screen.width;
+        
+        int passingTutorial = PlayerPrefs.GetInt("passTutorial", 0);
+        if (passingTutorial == 0)
+            inTutorial = true;
+        else
+            inTutorial = false;
+         
+        enemy.SetTutorialState(inTutorial);
     }
 
     public void Update()
@@ -124,14 +147,49 @@ public class Player : MonoBehaviour, ITakeDamage
 
             if (direction.y > 0 && direction.magnitude > minDistance)
             {
+                if (inTutorial && tutorialState != TutorialState.JumpFar)
+                    return;
+
+                if (inTutorial)
+                {
+                    tutorialState = TutorialState.JumpHeight;
+                    swipeTut.SetActive(false);
+                    canJump = true;
+                }
+
                 JumpHeight();
             }
             else if (direction.magnitude <= minDistance)
             {
                 if (touchInLeftSide)
+                {
+                    if (inTutorial && tutorialState != TutorialState.Begin)
+                        return;
+
+                    if (inTutorial)
+                    {
+                        tutorialState = TutorialState.JumpNear;
+                        leftTapTut.SetActive(false);
+                        canJump = true;
+                    }
+
                     JumpNear();
+                    
+                }
                 else
+                {
+                    if (inTutorial && tutorialState != TutorialState.JumpNear)
+                        return;
+
+                    if (inTutorial)
+                    {
+                        tutorialState = TutorialState.JumpFar;
+                        rightTapTut.SetActive(false);
+                        canJump = true;
+                    }
+
                     JumpFar();
+                }
             }
         }
 
@@ -145,11 +203,6 @@ public class Player : MonoBehaviour, ITakeDamage
                 _velocity.y += gravity * Time.deltaTime;
 
                 _controller.move(_velocity * Time.deltaTime);
-            }
-
-            if (_controller.transform.position.y < -10f)
-            {
-                LevelManager.Instance.KillPlayer();
             }
         }
         else
@@ -407,6 +460,36 @@ public class Player : MonoBehaviour, ITakeDamage
                 canJump = true;
 
                 _animator.Play(Animator.StringToHash("Idle"));
+
+                if (inTutorial)
+                {
+                    canJump = false;
+                    if (tutorialState == null)
+                    {
+                        tutorialState = TutorialState.Begin;
+                    }
+
+                    if (tutorialState == TutorialState.Begin)
+                    {
+                        leftTapTut.SetActive(true);
+                    }
+                    else if (tutorialState == TutorialState.JumpNear){
+                        rightTapTut.SetActive(true);
+                    }
+                    else if (tutorialState == TutorialState.JumpFar)
+                    {
+                        swipeTut.SetActive(true);
+                    }
+                    else
+                    {
+                        inTutorial = false;
+                        PlayerPrefs.SetInt("passTutorial", 1);
+                        enemy.SetTutorialState(false);
+
+                        // Tiny trick help enemy can jump again
+                        enemy.transform.position += new Vector3(0f, 0.5f, 0f);
+                    }
+                }
             }
             else if (hit.transform.tag == "Crocodile")
             {   
@@ -461,6 +544,17 @@ public class Player : MonoBehaviour, ITakeDamage
 
                 TeleportWood teleportWood = hit.transform.gameObject.GetComponent<TeleportWood>();
                 teleportWood.AddTargetTrack();
+            }
+            else if (hit.transform.tag == "BrokenPlatform")
+            {
+                _controller.move(hit.transform.position - transform.position);
+                canJump = true;
+
+                _animator.Play(Animator.StringToHash("Idle"));
+
+                BrokenPlatform brokenPlatform = hit.transform.gameObject.GetComponent<BrokenPlatform>();
+                brokenPlatform.onBroken += this.onBrokenPlatform;
+                brokenPlatform.WakeUp();
             }
             
         }
@@ -547,6 +641,11 @@ public class Player : MonoBehaviour, ITakeDamage
             if (transform.position.x <= posX + 0.5f)
                 LevelManager.Instance.KillPlayer();
         }
+    }
+
+    void onBrokenPlatform()
+    {
+        canJump = false;
     }
     #endregion
 
