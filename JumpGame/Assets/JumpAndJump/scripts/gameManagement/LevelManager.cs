@@ -42,6 +42,8 @@ public class LevelManager : MonoBehaviour
 
     private float bottomPostionY = 0f;
 
+	public int levelNumber;
+
     public void Awake()
     {
         _savedPoints = GameManager.Instance.Points;
@@ -50,6 +52,10 @@ public class LevelManager : MonoBehaviour
         // Find the bottom of the scene
         float camHalfHeight = Camera.main.orthographicSize;
         bottomPostionY = Camera.main.transform.position.y - camHalfHeight + 5f;
+
+		// Random levelNumber
+		levelNumber = UnityEngine.Random.Range (0, 3);
+
     }
 
     public void Start()

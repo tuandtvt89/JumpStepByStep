@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BrokenPlatform : MonoBehaviour {
+public class BrokenPlatform_Night : MonoBehaviour {
 
     private float waitToBrokenTime = 0.3f;
     private Animator _animator;
@@ -9,21 +9,12 @@ public class BrokenPlatform : MonoBehaviour {
 
     public delegate void BrokenPlatformHandler();
     public event BrokenPlatformHandler onBroken;
-
-	private int levelNumber;
     // Use this for initialization
     void Start()
     {
         _animator = GetComponent<Animator>();
         _collider = GetComponent<EdgeCollider2D>();
-
-		levelNumber = LevelManager.Instance.levelNumber;
-		if (levelNumber == 0)
-        	_animator.Play(Animator.StringToHash("Broken_Idle"));
-		else if (levelNumber == 1)
-			_animator.Play(Animator.StringToHash("Broken_Idle_Night"));
-		else
-			_animator.Play(Animator.StringToHash("Broken_Idle_Sunset"));
+        _animator.Play(Animator.StringToHash("Broken_Idle_Night"));
     }
 
     public void WakeUp()
@@ -33,13 +24,7 @@ public class BrokenPlatform : MonoBehaviour {
 
     private IEnumerator WaitAndAttack()
     {
-		if (levelNumber == 0)
-			_animator.Play(Animator.StringToHash("Broken_Break"));
-		else if (levelNumber == 1)
-			_animator.Play(Animator.StringToHash("Broken_Break_Night"));
-		else
-			_animator.Play(Animator.StringToHash("Broken_Break_Sunset"));
-        
+        _animator.Play(Animator.StringToHash("Broken_Break_Night"));
         yield return new WaitForSeconds(waitToBrokenTime);
         _collider.enabled = false;
         if (onBroken != null)
