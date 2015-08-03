@@ -53,9 +53,8 @@ public class LevelManager : MonoBehaviour
         float camHalfHeight = Camera.main.orthographicSize;
         bottomPostionY = Camera.main.transform.position.y - camHalfHeight + 5f;
 
-		// Random levelNumber
-		levelNumber = UnityEngine.Random.Range (0, 3);
-
+        // Random levelNumber
+        levelNumber = UnityEngine.Random.Range (0, 3);
     }
 
     public void Start()
@@ -139,8 +138,8 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator KillPlayerCo()
     {
+		mCamera.cameraFollowsPlayer = false;
         Player.Kill();
-        mCamera.cameraFollowsPlayer = false;
         yield return new WaitForSeconds(0.5f);
         JumpEnemy.Pause();
         GameOverPopUp.SetActive(true);

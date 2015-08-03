@@ -200,17 +200,15 @@ public class Player : MonoBehaviour, ITakeDamage
             if (isUsingGravity)
             {
                 // apply gravity before moving
-                _velocity.y += gravity * Time.deltaTime;
-
-                _controller.move(_velocity * Time.deltaTime);
+                //_velocity.y += gravity * Time.deltaTime;
+                _controller.move(new Vector3(0, gravity * Time.deltaTime, 0));
             }
         }
         else
         {
             // apply gravity before moving
-            _velocity.y += gravity * Time.deltaTime;
-
-            _controller.move(_velocity * Time.deltaTime);
+            //_velocity.y += gravity * Time.deltaTime;
+            _controller.move(new Vector3(0, gravity * Time.deltaTime, 0));
 
         }
         
@@ -643,9 +641,13 @@ public class Player : MonoBehaviour, ITakeDamage
         }
     }
 
-    void onBrokenPlatform()
+    void onBrokenPlatform(float posX)
     {
-        canJump = false;
+		if (_controller.collisionState.becameGroundedThisFrame || _controller.isGrounded || _controller.collisionState.wasGroundedLastFrame)
+		{
+			if (transform.position.x <= posX + 0.5f)
+				canJump = false;
+		}
     }
     #endregion
 

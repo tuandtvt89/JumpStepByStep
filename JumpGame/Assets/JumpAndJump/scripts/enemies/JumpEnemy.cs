@@ -78,9 +78,8 @@ public class JumpEnemy : MonoBehaviour
         if (isUsingGravity)
         {
             // apply gravity before moving
-            _velocity.y += gravity * Time.deltaTime;
-
-            _controller.move(_velocity * Time.deltaTime);
+            //_velocity.y += gravity * Time.deltaTime;
+            _controller.move(new Vector3(0, gravity * Time.deltaTime, 0));
         }
     }
 
@@ -230,24 +229,22 @@ public class JumpEnemy : MonoBehaviour
                                              gameObject.transform.position.z);
             StartCoroutine(JumpFarByTranslate());
         }
+		else if (other.gameObject.tag == "BrokenPlatform")
+		{
+			_controller.move(other.transform.position - transform.position);
+			isUsingGravity = false;
+			canJump = true;
+			
+			_animator.Play(Animator.StringToHash("Idle"));
+			
+			if (playerScript.jumpTrack.Count > 0)
+				JumpByIndex(playerScript.jumpTrack.Dequeue());
+		}
     }
 
     void onTriggerStayEvent(Collider2D other)
     {
         if (other.gameObject.tag == "TeleportWood")
-        {
-            if (isUsingGravity) // Check when finish jumping
-            {
-                isUsingGravity = false;
-                canJump = true;
-
-                _animator.Play(Animator.StringToHash("Idle"));
-
-                if (playerScript.jumpTrack.Count > 0)
-                    JumpByIndex(playerScript.jumpTrack.Dequeue());
-            }
-        }
-        else if (other.gameObject.tag == "BrokenPlatform")
         {
             if (isUsingGravity) // Check when finish jumping
             {
