@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class JumpEnemy : MonoBehaviour
 {
@@ -9,14 +8,8 @@ public class JumpEnemy : MonoBehaviour
     public ParticleSystem touchTheGroundEffect;
     private CharacterController2D _controller;
     private Animator _animator;
-    private float _normalizedHorizontalSpeed;
-    private float jumpButtonPressTime = 0;
     private bool _isFacingRight = true;
-    // INPUT AXIS
-    private float HorizontalMove;
-    private float VerticalMove;
-    private float OriginalGravity;
-    public float forceToLowJumpX, forceToLowJumpY, forceToFarJumpX, forceToFarJumpY, forceToHighJumpX, forceToHighJumpY;
+   
     public enum JumpState
     {
         Nothing,
@@ -26,7 +19,6 @@ public class JumpEnemy : MonoBehaviour
     }
     private JumpState currentJumpState;
     public float timeToThink;
-    private float currentTimeToThink;
     private int jumpIndex;
     public GameObject player;
     private bool canJump;
@@ -45,11 +37,17 @@ public class JumpEnemy : MonoBehaviour
     // Tutorial
     private bool inTutorial = false;
 
+    // Jump Input
+    public float jumpPower = 35.0f;
+    private Vector3 jumpStartPos;
+    private Vector3 jumpEndPos;
+    private float jumpHeight = 0.0f;
+    private float jumpVerticalVelocity = 35.0f;
+    private float jumpCurTime = 0.0f;
+
     void Awake()
     {
         _controller = GetComponent<CharacterController2D>();
-        
-        currentTimeToThink = 0.0f;
     }
 
     public void Start()
@@ -58,6 +56,8 @@ public class JumpEnemy : MonoBehaviour
         _isFacingRight = transform.localScale.x > 0;
         _boxCollider = GetComponent<BoxCollider2D>();
         transform.position = new Vector2(transform.position.x, startPos.position.y);
+
+        currentJumpState = JumpState.Nothing;
 
         playerScript = player.GetComponent<Player>();
 
@@ -73,7 +73,6 @@ public class JumpEnemy : MonoBehaviour
 
     public void Update()
     {
-        //UpdateAnimator();
 
         if (isUsingGravity)
         {
@@ -81,46 +80,13 @@ public class JumpEnemy : MonoBehaviour
             //_velocity.y += gravity * Time.deltaTime;
             _controller.move(new Vector3(0, gravity * Time.deltaTime, 0));
         }
+
+        WaitForJumpInput();
     }
 
     public void SetTutorialState(bool mInTutorial)
     {
         this.inTutorial = mInTutorial;
-    }
-
-    private void UpdateAnimator()
-    {
-
-        //_animator.SetBool("isGrounded", _controller.isGrounded);
-        //_animator.SetFloat("Speed", Mathf.Abs(_controller.velocity.x));
-        //_animator.SetFloat("vSpeed", _controller.velocity.y);
-    }
-
-    public void JumpNear()
-    {
-        currentJumpState = JumpState.Near;
-    }
-
-    public void JumpFar()
-    {
-        currentJumpState = JumpState.Far;
-    }
-
-    public void JumpHeight()
-    {
-        currentJumpState = JumpState.Height;
-    }
-
-    private Vector2 GetForceByJumpState()
-    {
-        Vector2 JumpWithForce = Vector2.zero;
-        if (currentJumpState == JumpState.Near)
-            JumpWithForce = new Vector2(forceToLowJumpX, forceToLowJumpY);
-        else if (currentJumpState == JumpState.Far)
-            JumpWithForce = new Vector2(forceToFarJumpX, forceToFarJumpY);
-        else if (currentJumpState == JumpState.Height)
-            JumpWithForce = new Vector2(forceToHighJumpX, forceToHighJumpY);
-        return JumpWithForce;
     }
 
     void AddGroundTouchEffect()
@@ -162,7 +128,7 @@ public class JumpEnemy : MonoBehaviour
                 _animator.Play(Animator.StringToHash("Idle"));
 
                 if (playerScript.jumpTrack.Count > 0)
-                    JumpByIndex(playerScript.jumpTrack.Dequeue());
+                    StartCoroutine(JumpAndThink(playerScript.jumpTrack.Dequeue()));
 
                 CrocodileEnemy crocodileEnemy = hit.transform.gameObject.GetComponent<CrocodileEnemy>();
                 crocodileEnemy.WakeUpWithoutAttacking();
@@ -224,10 +190,12 @@ public class JumpEnemy : MonoBehaviour
         }
         else if (other.gameObject.tag == "Jumper")
         {
-            gameObject.transform.position = new Vector3(other.transform.position.x + 0.4f,
-                                             gameObject.transform.position.y,
-                                             gameObject.transform.position.z);
-            StartCoroutine(JumpFarByTranslate());
+            _controller.move(other.transform.position - transform.position);
+            isUsingGravity = false;
+            canJump = true;
+
+            _animator.Play(Animator.StringToHash("Idle"));
+            JumpByIndex(2);
         }
 		else if (other.gameObject.tag == "BrokenPlatform")
 		{
@@ -304,10 +272,9 @@ public class JumpEnemy : MonoBehaviour
             if (distance < 4)
                 timeToThink = 0.5f;
             else
-                timeToThink = 0.0f;
+                timeToThink = 0.1f;
             yield return new WaitForSeconds(timeToThink);
             JumpByIndex(index);
-            _animator.Play(Animator.StringToHash("Jump"));
         }
     }
 
@@ -315,102 +282,67 @@ public class JumpEnemy : MonoBehaviour
     {
         if (canJump)
         {
+            AddGroundTouchEffect();
+
+            canJump = false;
+            isUsingGravity = false;
+            jumpStartPos = transform.position;
+            _animator.Play(Animator.StringToHash("Jump"));
+
             if (index == 1)
-                StartCoroutine(JumpNearByTranslate());
+            {
+                currentJumpState = JumpState.Near;
+                jumpEndPos = new Vector3(jumpStartPos.x + 3.6f, jumpStartPos.y, jumpStartPos.z);
+            }
             else if (index == 2)
-                StartCoroutine(JumpFarByTranslate());
+            {
+                currentJumpState = JumpState.Far;
+                jumpEndPos = new Vector3(jumpStartPos.x + 7.2f, jumpStartPos.y, jumpStartPos.z);
+            }
             else if (index == 3)
-                StartCoroutine(JumpHeightByTranslate());
+            {
+                currentJumpState = JumpState.Height;
+                jumpEndPos = new Vector3(jumpStartPos.x + 3.6f, jumpStartPos.y + 5.4f, jumpStartPos.z);
+            }
         }
     }
 
-    IEnumerator JumpNearByTranslate()
+    private void WaitForJumpInput()
     {
-        AddGroundTouchEffect();
-
-        canJump = false;
-        isUsingGravity = false;
-        float timeJump = 0.2f;
-        float jumpPower = 35.0f;
-        float Height = 0.0f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y, startPos.z);
-        float verticalVelocity = jumpPower;
-        float curTime = 0.0f;
-
-        while (curTime < timeJump)
+        if (currentJumpState == JumpState.Near)
         {
-            float rate = curTime / timeJump;
-            Height += verticalVelocity * Time.deltaTime;
-            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
-
-            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            _controller.move(resultPosition - transform.position);
-            curTime += Time.deltaTime;
-            yield return new WaitForSeconds(0);
+            JumpByTranslate(0.2f);
         }
-
-        isUsingGravity = true;
+        else if (currentJumpState == JumpState.Far)
+        {
+            JumpByTranslate(0.3f);
+        }
+        else if (currentJumpState == JumpState.Height)
+        {
+            JumpByTranslate(0.25f);
+        }
     }
 
-    IEnumerator JumpFarByTranslate()
+    private void JumpByTranslate(float timeJump)
     {
-        AddGroundTouchEffect();
-
-        canJump = false;
-        isUsingGravity = false;
-        float timeJump = 0.3f;
-        float jumpPower = 35.0f;
-        float Height = 0.0f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 7.2f, startPos.y, startPos.z);
-        float verticalVelocity = jumpPower;
-        float curTime = 0.0f;
-
-        while (curTime < timeJump)
+        if (jumpCurTime < timeJump)
         {
-            float rate = curTime / timeJump;
-            Height += verticalVelocity * Time.deltaTime;
-            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
+            float rate = jumpCurTime / timeJump;
+            jumpHeight += jumpVerticalVelocity * Time.deltaTime;
+            jumpVerticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
 
-            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * Height);
+            Vector3 basePosition = Vector3.Lerp(jumpStartPos, jumpEndPos, rate);
+            Vector3 resultPosition = basePosition + (Vector3.up * jumpHeight);
             _controller.move(resultPosition - transform.position);
-            curTime += Time.deltaTime;
-            yield return new WaitForSeconds(0);
+            jumpCurTime += Time.deltaTime;
         }
-
-        isUsingGravity = true;
-    }
-
-    IEnumerator JumpHeightByTranslate()
-    {
-        AddGroundTouchEffect();
-
-        canJump = false;
-        isUsingGravity = false;
-        float timeJump = 0.25f;
-        float jumpPower = 35.0f;
-        float Height = 0.0f;
-        Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 3.6f, startPos.y + 5.4f, startPos.z);
-        float verticalVelocity = jumpPower;
-        float curTime = 0.0f;
-
-        while (curTime < timeJump)
+        else
         {
-            float rate = curTime / timeJump;
-            Height += verticalVelocity * Time.deltaTime;
-            verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
-
-            Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
-            Vector3 resultPosition = basePosition + (Vector3.up * Height);
-            _controller.move(resultPosition - transform.position);
-            curTime += Time.deltaTime;
-            yield return new WaitForSeconds(0);
+            isUsingGravity = true;
+            jumpHeight = 0.0f;
+            jumpCurTime = 0.0f;
+            jumpVerticalVelocity = jumpPower;
+            currentJumpState = JumpState.Nothing;
         }
-
-        isUsingGravity = true;
     }
 }
