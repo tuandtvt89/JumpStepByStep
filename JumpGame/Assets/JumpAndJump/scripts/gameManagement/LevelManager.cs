@@ -173,7 +173,6 @@ public class LevelManager : MonoBehaviour
     {
         if (currentLevelIndex > 1)
         {
-            Debug.Log("Swap level " + currentLevelIndex);
             levelList.Add(firstLevel);
             firstLevel.transform.position = new Vector3(-40, bottomPostionY, 0);
             firstLevel = secondLevel;

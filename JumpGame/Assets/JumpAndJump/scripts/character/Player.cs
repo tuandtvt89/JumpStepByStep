@@ -55,6 +55,10 @@ public class Player : MonoBehaviour, ITakeDamage
     // Tun El
     public Queue<int> jumpTrack = new Queue<int>();
 
+    // Find next postion
+    public LayerMask platformMask = 0;
+    public GameObject Spotter;
+
     // movement config
     public float gravity = -25f;
     private bool isUsingGravity = true;
@@ -219,13 +223,6 @@ public class Player : MonoBehaviour, ITakeDamage
         
     }
 
-    void OnBecameInvisible()
-    {
-        _controller.transform.position = new Vector2(-100, 0);
-        gameObject.SetActive(false);
-        enabled = false;
-    }
-
     public void Kill()
     {
         GetComponent<Collider2D>().enabled = false;
@@ -309,7 +306,25 @@ public class Player : MonoBehaviour, ITakeDamage
     {
         _controller.recalculateDistanceBetweenRays();
     }
-
+    /*
+    private bool findNextPostionBySpotter(Vector2 start, Vector2 direction, float distance, ref Vector2 nextPostion) {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(start, direction, distance, platformMask);
+        if (hits.Length > 0)
+        {
+            for (int i = 0; i < hits.Length; i++)
+            {
+                RaycastHit2D hit = hits[i];
+                if (hit.transform.tag == "EndLevel")
+                    continue;
+                
+                Debug.Log("Name: " + hit.transform.name);
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+    */
     public void JumpNear()
     {
         //currentJumpState = JumpState.Near;
@@ -372,7 +387,7 @@ public class Player : MonoBehaviour, ITakeDamage
             float rate = curTime / timeJump;
             height += verticalVelocity * Time.deltaTime;
             verticalVelocity = Mathf.Lerp(jumpPower, -jumpPower, rate);
-
+            
             Vector3 basePosition = Vector3.Lerp(startPos, endPos, rate);
             Vector3 resultPosition = basePosition + (Vector3.up * height);
             _controller.move(resultPosition - transform.position);
