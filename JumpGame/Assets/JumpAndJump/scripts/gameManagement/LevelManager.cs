@@ -68,7 +68,8 @@ public class LevelManager : MonoBehaviour
         scoreText = scoreText.GetComponent<Text>();
 
         // Show banner admob
-        AdMob.hideBanner(false);
+        // place it on the top
+        AdMob.createBanner("ca-app-pub-3705088179152525/3782204294", "ca-app-pub-8386987260001674/8398905145", AdMobBanner.SmartBanner, AdMobLocation.TopCenter);
 
         FeedLevel();
         _checkpoints = FindObjectsOfType<CheckPoint>().OrderBy(t => t.transform.position.x).ToList();
