@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+using Prime31;
 
 public class LevelManager : MonoBehaviour
 {
@@ -44,6 +46,8 @@ public class LevelManager : MonoBehaviour
 
 	public int levelNumber;
 
+    public Text scoreText; 
+
     public void Awake()
     {
         _savedPoints = GameManager.Instance.Points;
@@ -59,6 +63,13 @@ public class LevelManager : MonoBehaviour
 
     public void Start()
     {
+        // Init score
+        GameManager.Instance.ResetPoints(0);
+        scoreText = scoreText.GetComponent<Text>();
+
+        // Show banner admob
+        AdMob.hideBanner(false);
+
         FeedLevel();
         _checkpoints = FindObjectsOfType<CheckPoint>().OrderBy(t => t.transform.position.x).ToList();
         _currentCheckPointIndex = _checkpoints.Count > 0 ? 0 : -1;
@@ -97,6 +108,12 @@ public class LevelManager : MonoBehaviour
 						_checkpoints [_currentCheckPointIndex].SpawnPlayer (Player);
 				}
 #endif
+    }
+
+    public void AddScore(int score)
+    {
+        GameManager.Instance.AddPoints(score);
+        scoreText.text = "" + GameManager.Instance.Points;
     }
 
     public void Update()
@@ -138,11 +155,22 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator KillPlayerCo()
     {
-		mCamera.cameraFollowsPlayer = false;
+        int randomNumber = UnityEngine.Random.Range(0, 2);
+        if (AdMob.isInterstitalReady() && randomNumber == 0) {
+            AdMob.displayInterstital();
+
+            AdMob.requestInterstital("ca-app-pub-3705088179152525/5258937492", "");
+        }
+            
+        mCamera.cameraFollowsPlayer = false;
         Player.Kill();
         yield return new WaitForSeconds(0.5f);
         JumpEnemy.Pause();
         GameOverPopUp.SetActive(true);
+
+        // Submit score
+        PlayGameServices.submitScore("CgkI2K-Po5wXEAIQAQ", GameManager.Instance.Points);
+
         GameManager.Instance.ResetPoints(_savedPoints);
     }
 

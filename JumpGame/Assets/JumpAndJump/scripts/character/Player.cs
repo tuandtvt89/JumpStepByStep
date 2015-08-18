@@ -319,6 +319,9 @@ public class Player : MonoBehaviour, ITakeDamage
     {
         if (canJump)
         {
+            // Add Score
+            LevelManager.Instance.AddScore(1);
+
             AddGroundTouchEffect();
 
             canJump = false;
@@ -336,6 +339,9 @@ public class Player : MonoBehaviour, ITakeDamage
     {
         if (canJump)
         {
+            // Add Score
+            LevelManager.Instance.AddScore(2);
+
             AddGroundTouchEffect();
 
             canJump = false;
@@ -354,6 +360,9 @@ public class Player : MonoBehaviour, ITakeDamage
     {
         if (canJump)
         {
+            // Add Score
+            LevelManager.Instance.AddScore(1);
+
             AddGroundTouchEffect();
 
             canJump = false;
@@ -550,6 +559,8 @@ public class Player : MonoBehaviour, ITakeDamage
         else if (other.gameObject.tag == "Jumper")
         {
             //_controller.move(other.transform.position - transform.position);
+            // Add Score
+            LevelManager.Instance.AddScore(2);
 
             AddGroundTouchEffect();
 
