@@ -46,7 +46,9 @@ public class LevelManager : MonoBehaviour
 
 	public int levelNumber;
 
-    public Text scoreText; 
+    public Text scoreText;
+    public Text gameOverScore;
+    public Text gameOverHighScore;
 
     public void Awake()
     {
@@ -66,6 +68,8 @@ public class LevelManager : MonoBehaviour
         // Init score
         GameManager.Instance.ResetPoints(0);
         scoreText = scoreText.GetComponent<Text>();
+        gameOverScore = gameOverScore.GetComponent<Text>();
+        gameOverHighScore = gameOverHighScore.GetComponent<Text>();
 
         // Show banner admob
         // place it on the top
@@ -168,6 +172,16 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         JumpEnemy.Pause();
         GameOverPopUp.SetActive(true);
+
+        // Update game over score
+        int highScoreNumber = PlayerPrefs.GetInt("high_score", 0);
+        if (GameManager.Instance.Points > highScoreNumber) {
+            highScoreNumber = GameManager.Instance.Points;
+            PlayerPrefs.SetInt("high_score", highScoreNumber);
+        }
+
+        gameOverScore.text = "" + GameManager.Instance.Points;
+        gameOverHighScore.text = "" + highScoreNumber;
 
         // Submit score
         PlayGameServices.submitScore("CgkI2K-Po5wXEAIQAQ", GameManager.Instance.Points);
