@@ -1,0 +1,398 @@
+fileFormatVersion: 2
+guid: 461ffb4966130294c94800f62997ee56
+timeCreated: 1431958838
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: spacecorgi_flat-idle_0
+    21300002: spacecorgi_flat-idle_1
+    21300004: spacecorgi_flat-idle_2
+    21300006: spacecorgi_flat-idle_3
+    21300008: spacecorgi_flat-idle_4
+    21300010: spacecorgi_flat-idle_5
+    21300012: spacecorgi_flat-idle_6
+    21300014: spacecorgi_flat-idle_7
+    21300016: spacecorgi_flat-idle_8
+    21300018: spacecorgi_flat-idle_9
+    21300020: spacecorgi_flat-idle_10
+    21300022: spacecorgi_flat-idle_11
+    21300024: spacecorgi_flat-idle_12
+    21300026: spacecorgi_flat-idle_13
+    21300028: spacecorgi_flat-idle_14
+    21300030: spacecorgi_flat-idle_15
+    21300032: spacecorgi_flat-idle_16
+    21300034: spacecorgi_flat-idle_17
+    21300036: spacecorgi_flat-idle_18
+    21300038: spacecorgi_flat-idle_19
+    21300040: spacecorgi_flat-idle_20
+    21300042: spacecorgi_flat-idle_21
+    21300044: spacecorgi_flat-idle_22
+    21300046: spacecorgi_flat-idle_23
+    21300048: spacecorgi_flat-idle_24
+    21300050: spacecorgi_flat-idle_25
+    21300052: spacecorgi_flat-idle_26
+    21300054: spacecorgi_flat-idle_27
+    21300056: spacecorgi_flat-idle_28
+    21300058: spacecorgi_flat-idle_29
+    21300060: spacecorgi_flat-idle_30
+    21300062: spacecorgi_flat-idle_31
+    21300064: spacecorgi_flat-idle_32
+    21300066: spacecorgi_flat-idle_33
+    21300068: spacecorgi_flat-idle_34
+    21300070: spacecorgi_flat-idle_35
+    21300072: spacecorgi_flat-idle_36
+    21300074: spacecorgi_flat-idle_37
+    21300076: spacecorgi_flat-idle_38
+    21300078: spacecorgi_flat-idle_39
+    21300080: spacecorgi_flat-idle_40
+    21300082: spacecorgi_flat-idle_41
+    21300084: spacecorgi_flat-idle_42
+    21300086: spacecorgi_flat-idle_43
+    21300088: spacecorgi_flat-idle_44
+    21300090: spacecorgi_flat-idle_45
+    21300092: spacecorgi_flat-idle_46
+    21300094: spacecorgi_flat-idle_47
+    21300096: spacecorgi_flat-idle_48
+    21300098: spacecorgi_flat-idle_49
+    21300100: spacecorgi_flat-idle_50
+    21300102: spacecorgi_flat-idle_51
+    21300104: spacecorgi_flat-idle_52
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: spacecorgi_flat-idle_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_2
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_3
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_4
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_5
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_6
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_7
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_8
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_9
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_10
+      rect:
+        serializedVersion: 2
+        x: 1441
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_11
+      rect:
+        serializedVersion: 2
+        x: 1585
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_12
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_13
+      rect:
+        serializedVersion: 2
+        x: 1873
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_14
+      rect:
+        serializedVersion: 2
+        x: 2017
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_15
+      rect:
+        serializedVersion: 2
+        x: 2161
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_16
+      rect:
+        serializedVersion: 2
+        x: 2305
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_17
+      rect:
+        serializedVersion: 2
+        x: 2449
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_18
+      rect:
+        serializedVersion: 2
+        x: 2593
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_19
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_20
+      rect:
+        serializedVersion: 2
+        x: 2881
+        y: 365
+        width: 140
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_21
+      rect:
+        serializedVersion: 2
+        x: 3025
+        y: 365
+        width: 142
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_22
+      rect:
+        serializedVersion: 2
+        x: 3169
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_23
+      rect:
+        serializedVersion: 2
+        x: 3313
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_24
+      rect:
+        serializedVersion: 2
+        x: 3457
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_25
+      rect:
+        serializedVersion: 2
+        x: 3601
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_26
+      rect:
+        serializedVersion: 2
+        x: 3745
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_27
+      rect:
+        serializedVersion: 2
+        x: 3889
+        y: 365
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-idle_28
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 219
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

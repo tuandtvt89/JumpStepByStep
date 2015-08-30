@@ -1,0 +1,330 @@
+fileFormatVersion: 2
+guid: 5e30f98e97ee5634eb503a68f098f938
+timeCreated: 1431959054
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: spacecorgi_flat-shoot_0
+    21300002: spacecorgi_flat-shoot_1
+    21300004: spacecorgi_flat-shoot_2
+    21300006: spacecorgi_flat-shoot_3
+    21300008: spacecorgi_flat-shoot_4
+    21300010: spacecorgi_flat-shoot_5
+    21300012: spacecorgi_flat-shoot_6
+    21300014: spacecorgi_flat-shoot_7
+    21300016: spacecorgi_flat-shoot_8
+    21300018: spacecorgi_flat-shoot_9
+    21300020: spacecorgi_flat-shoot_10
+    21300022: spacecorgi_flat-shoot_11
+    21300024: spacecorgi_flat-shoot_12
+    21300026: spacecorgi_flat-shoot_13
+    21300028: spacecorgi_flat-shoot_14
+    21300030: spacecorgi_flat-shoot_15
+    21300032: spacecorgi_flat-shoot_16
+    21300034: spacecorgi_flat-shoot_17
+    21300036: spacecorgi_flat-shoot_18
+    21300038: spacecorgi_flat-shoot_19
+    21300040: spacecorgi_flat-shoot_20
+    21300042: spacecorgi_flat-shoot_21
+    21300044: spacecorgi_flat-shoot_22
+    21300046: spacecorgi_flat-shoot_23
+    21300048: spacecorgi_flat-shoot_24
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: spacecorgi_flat-shoot_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_1
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 363
+        width: 148
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_2
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 363
+        width: 146
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_3
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 363
+        width: 146
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_4
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 363
+        width: 145
+        height: 142
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_5
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 363
+        width: 146
+        height: 143
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_6
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_7
+      rect:
+        serializedVersion: 2
+        x: 1211
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_8
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_9
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_10
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_11
+      rect:
+        serializedVersion: 2
+        x: 1891
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_12
+      rect:
+        serializedVersion: 2
+        x: 2061
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_13
+      rect:
+        serializedVersion: 2
+        x: 2231
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_14
+      rect:
+        serializedVersion: 2
+        x: 2401
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_15
+      rect:
+        serializedVersion: 2
+        x: 2571
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_16
+      rect:
+        serializedVersion: 2
+        x: 2741
+        y: 363
+        width: 141
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_17
+      rect:
+        serializedVersion: 2
+        x: 2911
+        y: 363
+        width: 140
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_18
+      rect:
+        serializedVersion: 2
+        x: 3081
+        y: 363
+        width: 140
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_19
+      rect:
+        serializedVersion: 2
+        x: 3251
+        y: 363
+        width: 140
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_20
+      rect:
+        serializedVersion: 2
+        x: 3421
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_21
+      rect:
+        serializedVersion: 2
+        x: 3591
+        y: 363
+        width: 142
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_22
+      rect:
+        serializedVersion: 2
+        x: 3761
+        y: 363
+        width: 143
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_23
+      rect:
+        serializedVersion: 2
+        x: 3931
+        y: 363
+        width: 144
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spacecorgi_flat-shoot_24
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 215
+        width: 144
+        height: 144
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
